@@ -14,7 +14,7 @@ public class ButtonListener implements GoBangconfig,ActionListener{
     public GoBangframe gf;
     public JComboBox box;
     
-    public ButtonListener(GoBangframe gf){
+    public ButtonListener(GoBangframe gf,JComboBox box){//添加box作为参数，传入combobox，并对其监听
         this.gf=gf; //获取左半部分的画板
         this.box=box;//获取可选框对象
     }

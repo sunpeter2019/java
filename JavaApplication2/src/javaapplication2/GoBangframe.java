@@ -10,10 +10,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class GoBangframe extends JPanel implements GoBangconfig{
@@ -143,18 +145,19 @@ public class GoBangframe extends JPanel implements GoBangconfig{
                     button[i].setPreferredSize(dim2);
                     jp.add(button[i]);
             }
-            
-            //按钮监控类
-            ButtonListener butListen=new ButtonListener(this);
-            //对每一个按钮都添加状态事件的监听处理机制
-            for(int i=0;i<butname.length;i++){ 
-                button[i].addActionListener(butListen);
-            }
             //设置选项按钮
             String[] boxname= {"人人对战","人机对战"};
             JComboBox box=new JComboBox(boxname);
             jp.add(box);
             
+            //按钮监控类
+            ButtonListener butListen=new ButtonListener(this,box);
+            
+            //对每一个按钮都添加状态事件的监听处理机制
+            for(int i=0;i<butname.length;i++){ 
+                button[i].addActionListener(butListen);
+            }
+             
             //对可选框添加事件监听机制
 	    box.addActionListener(butListen);
             
@@ -175,30 +178,37 @@ public class GoBangframe extends JPanel implements GoBangconfig{
     public void paint(Graphics g){   // x,y,row,column?
             super.paint(g);
             
-            //重绘出棋盘
+            Image icon= new ImageIcon("chessboard.jpg").getImage();	//这里不能用ImageIcon  
+            g.drawImage(icon, 0, 0, row*size, column*size, null);
+
+            /*//重绘出棋盘
             g.setColor(Color.BLACK);
             for(int i=0;i<row;i++){
                     g.drawLine(x, y+size*i, x+size*(column-1), y+size*i);
             }
             for(int j=0;j<column;j++){
                     g.drawLine(x+size*j, y, x+size*j, y+size*(row-1)); 
-            }
+            }*/
             
             //重绘出棋子
             for(int i=0;i<row;i++){
                 for(int j=0;j<column;j++){
                     if(isAvail[i][j]==1){
-                        int countx=size*i+20;
-                        int county=size*j+20;
-                        g.setColor(Color.black);
+                        int countx=size*j+20;//棋盘坐标到位置的转化
+                        int county=size*i+20;
+                        //g.setColor(Color.black);
                         //public abstract void fillOval(int x,int y,int width,int height)使用当前颜色填充外接指定矩形框的椭圆。
-                        g.fillOval(countx-size/2, county-size/2, size, size); 
+                        //g.fillOval(countx-size/2, county-size/2, size, size);
+                        g.drawImage(blackchess,countx-size/2, county-size/2, size, size,null);
+                        //public abstract boolean drawImage(Image img,int x,int y,int width,int height,ImageObserver observer)
+                        //x - x 坐标。y - y 坐标。width - 矩形的宽度。height - 矩形的高度。observer - 当转换了更多图像时要通知的对象。
                     }
                     else if(isAvail[i][j]==2){
-                        int countx=size*i+20;
-                        int county=size*j+20;
-                        g.setColor(Color.white);
-                        g.fillOval(countx-size/2, county-size/2, size, size);
+                        int countx=size*j+20;
+                        int county=size*i+20;
+                        //g.setColor(Color.white);
+                        //g.fillOval(countx-size/2, county-size/2, size, size);
+                        g.drawImage(whitechess,countx-size/2, county-size/2, size, size,null);
                     }
                 }
             }

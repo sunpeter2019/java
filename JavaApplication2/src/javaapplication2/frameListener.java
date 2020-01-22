@@ -50,7 +50,7 @@ public class frameListener implements GoBangconfig,MouseListener {
 		  int Arrayj=(countx-20)/40;
 		  int Arrayi=(county-20)/40;
 		  
-		  if(gf.turn!=0)//判断是否可以进行游戏
+		  if(gf.turn!=0)//判断是否可以进行游戏 ？ 需要加个大括号 
 		  if(gf.isAvail[Arrayi][Arrayj]!=0) {
 			  System.out.println("此处已经有棋子了，请下在其它地方");
 		  }
@@ -59,10 +59,11 @@ public class frameListener implements GoBangconfig,MouseListener {
 			  if(gf.ChooseType==0) {	  
 				  if(gf.turn==1) {
 					  //先获取要落的地方
-					  g.setColor(Color.black);
+					  //g.setColor(Color.black);
 					  //落子
-					  g.fillOval(countx-size/2, county-size/2, size, size);
-					  //设置当前位置已经有棋子了,棋子为黑子
+					  //g.fillOval(countx-size/2, county-size/2, size, size);
+					  g.drawImage(blackchess,countx-size/2, county-size/2, size, size,null);  
+                                          //设置当前位置已经有棋子了,棋子为黑子
 					  gf.isAvail[Arrayi][Arrayj]=1;
 					  //把当前所下的棋子位置保存在动态数组中
 					  gf.ChessPositionList.add(new ChessPosition(Arrayi,Arrayj));
@@ -137,9 +138,10 @@ public class frameListener implements GoBangconfig,MouseListener {
 					  }
 				  }
 				  else if(gf.turn==2){
-					  g.setColor(Color.white);
-					  g.fillOval(countx-size/2, county-size/2, size, size);
+					  //g.setColor(Color.white);
+					  //g.fillOval(countx-size/2, county-size/2, size, size);
 					  //设置当前位置已经有棋子了，棋子为白子
+                                          g.drawImage(whitechess,countx-size/2, county-size/2, size, size,null);
 					  gf.ChessPositionList.add(new ChessPosition(Arrayi,Arrayj));
 					  gf.isAvail[Arrayi][Arrayj]=2;
 					  gf.turn--;
@@ -218,10 +220,11 @@ public class frameListener implements GoBangconfig,MouseListener {
 					  
 					  //人先落子
 					  //先获取要落的地方
-					  g.setColor(Color.black);
+					  //g.setColor(Color.black);
 					  //落子
-					  g.fillOval(countx-size/2, county-size/2, size, size);
-					  //设置当前位置已经有棋子了,棋子为黑子
+					  //g.fillOval(countx-size/2, county-size/2, size, size);
+					  g.drawImage(blackchess,countx-size/2, county-size/2, size, size,null);
+                                          //设置当前位置已经有棋子了,棋子为黑子
 					  gf.isAvail[Arrayi][Arrayj]=1;
 					  //把当前所下的棋子位置保存在动态数组中
 					  gf.ChessPositionList.add(new ChessPosition(Arrayi,Arrayj));
@@ -419,12 +422,13 @@ public class frameListener implements GoBangconfig,MouseListener {
 					  }
 					  
 					  //确定位置，落子
-					  g.setColor(Color.white);
+					  //g.setColor(Color.white);
 					  //i对应y，j对应x
 					  countx=20+AIj*40;
 					  county=20+AIi*40;
-					  g.fillOval(countx-size/2, county-size/2, size, size);
-					  //设置当前位置已经有棋子了，棋子为白子
+					  //g.fillOval(countx-size/2, county-size/2, size, size);
+					  g.drawImage(whitechess,countx-size/2, county-size/2, size, size,null);
+                                          //设置当前位置已经有棋子了，棋子为白子
 					  gf.ChessPositionList.add(new ChessPosition(AIi,AIj));
 					  gf.isAvail[AIi][AIj]=2;
 					  gf.turn--;
