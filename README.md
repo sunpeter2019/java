@@ -1,2 +1,2 @@
 # java
-java课程设计
+java  course design
